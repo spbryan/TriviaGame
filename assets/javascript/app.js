@@ -27,9 +27,12 @@ $(document).ready(function () {
     var trivium = "";
     var correctCtr = 0;
     var incorrectCtr = 0;
+    var questionCountdown = 29;
+    var questionIntervalId;
 
     $("#trivia-page").hide();
     $("#trivia-answer").hide();
+    $("#countdown-timer").hide();
 
     /**
      * On-Click function to start game
@@ -44,6 +47,7 @@ $(document).ready(function () {
      */
     $(".answer").on("click", function () {
         // debugger;
+        stopTimer();
         $("#trivia-page").empty();
         var id = $(this).attr("id");
         var selectedAnswer = parseInt(id.charAt(id.length - 1));
@@ -57,7 +61,7 @@ $(document).ready(function () {
             console.log("Incorrect");
             displayResult("Wrong!");
         }
-        
+        triviaIndex++;
     })
 
     /**
@@ -66,13 +70,29 @@ $(document).ready(function () {
     function askNextQuestion() {
         trivium = allTriviaList[triviaIndex];
         displayTrivium();
-        // startTimer();
+        questionIntervalId = setInterval(timer, 1000);
+    }
+
+    function timer() {
+        questionCountdown--;
+        $("#countdown-timer").html("<h2>" + "Timer: " + questionCountdown + "</h2>");
+
+        if (questionCountdown === 0) {
+            stopTimer();
+            $("#trivia-page").empty();
+            displayResult("Time's Up!!!")
+        }
+    }
+
+    function stopTimer() {
+        clearInterval(questionIntervalId);  //stops the interval
     }
 
     /**
      * Display the question and the list of possible answers
      */
     function displayTrivium() {
+        $("#countdown-timer").show();
         $("#trivia-page").show();
         //Display Question
         var questionElement = $("<h1/>");
@@ -119,7 +139,7 @@ $(document).ready(function () {
      * Retrieve the correct answer from the answers array on the object
      */
     function getCorrectAnswer() {
-        for(var i = 0; i < trivium.answers.length; i++) {
+        for (var i = 0; i < trivium.answers.length; i++) {
             var indexValue = trivium.answerKey - 1;
             return trivium.answers[indexValue];
         }

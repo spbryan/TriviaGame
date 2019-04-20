@@ -40,7 +40,8 @@ body {
 }
 
 #trivia-page,
-#trivia-answer {
+#trivia-answer,
+#countdown-timer {
     background-image: url(../images/old_parchment.jpg);
 }
 
