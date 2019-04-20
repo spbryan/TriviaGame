@@ -22,7 +22,7 @@ body {
 
 /* Class Styles */
 .answer:hover { 
-    background-color: yellow;
+    background-color: #ece0c3
 }
 
 .header h1 {
@@ -39,7 +39,8 @@ body {
     align-items: center;
 }
 
-#trivia-page {
+#trivia-page,
+#trivia-answer {
     background-image: url(../images/old_parchment.jpg);
 }
 
