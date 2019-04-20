@@ -8,20 +8,29 @@
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Calligraffitti|Great+Vibes|Just+Another+Hand|Ruthie|Stalemate|Tangerine"
+        rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
 <body>
     <section class="container">
         <section class="row text-center mt-1">
-            <div class="col-sm-12">
-                <!-- <img src="./assets/images/tbd" class="img-fluid" id="title-image" alt="Title"> -->
+            <div class="col-sm-12 header">
+                <!-- <img src="./assets/images/header1.JPG" class="img-fluid" id="title-image" alt="Title"> -->
+                <!-- <img src="./assets/images/header2.JPG" class="img-fluid" id="title-image" alt="Title"> -->
+                <!-- <img src="./assets/images/header3.JPG" class="img-fluid" id="title-image" alt="Title">
+                <img src="./assets/images/header4.JPG" class="img-fluid" id="title-image" alt="Title">
+                <img src="./assets/images/header5.JPG" class="img-fluid" id="title-image" alt="Title"> -->
+                <h1>American History Trivia</h1>
             </div>
         </section>
         <section class="row text-center mt-4">
             <div class="col-sm-4">
             </div>
             <div class="col-sm-4" id="start-game">
+                <button type="button" class="btn btn-dark">Start Game</button>
             </div>
             <div class="col-sm-4">
             </div>
@@ -34,20 +43,26 @@
             <div class="col-sm-4">
             </div>
         </section>
-        <section class="row text-center mt-4">
-            <div class="col-sm-2">
+        <section id="trivia-page">
+            <div class="row text-center mt-4">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-8" id="trivia-question">
+                </div>
+                <div class="col-sm-2">
+                </div>
             </div>
-            <div class="col-sm-8" id="trivia-question">
-            </div>
-            <div class="col-sm-2">
-            </div>
-        </section>
-        <section class="row text-left mt-4">
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-8" id="trivia-options">
-            </div>
-            <div class="col-sm-2">
+            <div class="row text-left mt-4">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-8" id="trivia-options">
+                    <div class="answer" id="answer-1"></div>
+                    <div class="answer" id="answer-2"></div>
+                    <div class="answer" id="answer-3"></div>
+                    <div class="answer" id="answer-4"></div>
+                </div>
+                <div class="col-sm-2">
+                </div>
             </div>
         </section>
         <section class="row text-left mt-4">
