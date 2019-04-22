@@ -27,15 +27,15 @@ $(document).ready(function () {
     var trivium = "";
     var correctCtr = 0;
     var incorrectCtr = 0;
+    var unansweredCtr = 0;
     var answerCountdown = 29;
     var answerIntervalId;
-    var nextCountdown = 3;
-    var nextIntervalId;
     var gameOver = false;
 
     $("#trivia-page").hide();
     $("#trivia-answer").hide();
     $("#countdown-timer").hide();
+    $("#summary").hide();
 
     /**
      * On-Click function to start game
@@ -49,7 +49,7 @@ $(document).ready(function () {
      * On-Click function to select answer
      */
     $(".answer").on("click", function () {
-        stopTimer();
+        stopAnswerTimer();
         $("#trivia-page").hide();
         var id = $(this).attr("id");
         var selectedAnswer = parseInt(id.charAt(id.length - 1));
@@ -61,7 +61,7 @@ $(document).ready(function () {
             incorrectCtr++;
             displayResult("Wrong!");
         }
-        transitionToNext();
+        transitionToNextQuestion();
     })
 
     /**
@@ -69,13 +69,15 @@ $(document).ready(function () {
      * to transition to the next "askNextQuestion".  Otherwise it sets a 
      * value to indicate the game is over
      */
-    function transitionToNext() {
+    function transitionToNextQuestion() {
         triviaIndex++;
         $("#trivia-question").empty();
         $(".answer").empty();
 
-        nextCountdown = 3;
-        nextIntervalId = setInterval(nextQuestionTimer, 1000);
+        setTimeout(function () {
+            transitionDelay();
+        }, 3000);
+
         if (triviaIndex < allTriviaList.length) {
             answerCountdown = 29;
         }
@@ -94,32 +96,42 @@ $(document).ready(function () {
         answerIntervalId = setInterval(answerTimer, 1000);
     }
 
+    /**
+     * Display a decrementing timer that counts down the time remaining
+     * for the user to answer the question
+     */
     function answerTimer() {
         answerCountdown--;
         $("#countdown-timer").html("<h2>" + "Timer: " + answerCountdown + "</h2>");
 
         if (answerCountdown === 0) {
-            stopTimer();
+            stopAnswerTimer();
             $("#trivia-page").hide();
             displayResult("Time's Up!!!")
-            transitionToNext();
+            unansweredCtr++;
+            transitionToNextQuestion();
         }
     }
 
-    function nextQuestionTimer() {
-        nextCountdown--;
-        if (nextCountdown === 0) {
-            $("#trivia-answer").hide();
-            if (gameOver) {
-                displayFinalGrade();
-            }
-            else {
-                askNextQuestion();
-            }
+    /**
+     * Action that occurs following a delay
+     */
+    function transitionDelay() {
+        $("#trivia-answer").hide();
+        if (gameOver) {
+            debugger;
+            displayFinalResults();
+            stopNextQuestionTimer();
+        }
+        else {
+            askNextQuestion();
         }
     }
 
-    function stopTimer() {
+    /**
+     * Stops the answer timer in the event that the user selects an answer
+     */
+    function stopAnswerTimer() {
         clearInterval(answerIntervalId);  //stops the interval
     }
 
@@ -139,7 +151,6 @@ $(document).ready(function () {
         for (var i = 0; i < trivium.answers.length; i++) {
             var answer = $("<h2/>");
             answer.attr("class", "answer");
-            // answer.attr("id", "answer-" + (i+1));
             answer.text((i + 1) + ") " + trivium.answers[i]);
             $("#answer-" + (i + 1)).append(answer);
         }
@@ -150,6 +161,7 @@ $(document).ready(function () {
      * @param message 
      */
     function displayResult(message) {
+        $("#countdown-timer").hide();
         $("#trivia-answer").show();
         var correctAnswer = getCorrectAnswer();
         var answerMessage = $("<h1/>");
@@ -170,8 +182,35 @@ $(document).ready(function () {
         $("#trivia-answer").append(answerImage);
     }
 
-    function displayFinalGrade() {
-        alert("Game Over");
+    /**
+     * Display the final results at the end of the quiz
+     */
+    function displayFinalResults() {
+        $("#summary").show();
+        var gameOver = $("<h1/>");
+        gameOver.attr("id", "game-over");
+        gameOver.text("Game Over!");
+        $("#summary").append(gameOver);
+
+        var correctAnswers = $("<h2/>");
+        correctAnswers.attr("id", "correct-answers");
+        correctAnswers.text("Correct Answers: " + correctCtr);
+        $("#summary").append(correctAnswers);
+
+        var incorrectAnswers = $("<h2/>");
+        incorrectAnswers.attr("id", "incorrect-answers");
+        incorrectAnswers.text("Incorrect Answers: " + incorrectCtr);
+        $("#summary").append(incorrectAnswers);
+
+        var unanswered = $("<h2/>");
+        unanswered.attr("id", "unanswered");
+        unanswered.text("Unanswered Questions: " + unansweredCtr);
+        $("#summary").append(unanswered);
+
+        var finalGrade = $("<h2/>");
+        finalGrade.attr("id", "final-grade");
+        finalGrade.text("Final Grade: " + determineFinalGrade());
+        $("#summary").append(finalGrade);
     }
 
     /**
@@ -181,6 +220,24 @@ $(document).ready(function () {
         for (var i = 0; i < trivium.answers.length; i++) {
             var indexValue = trivium.answerKey - 1;
             return trivium.answers[indexValue];
+        }
+    }
+
+    function determineFinalGrade() {
+        if (correctCtr > 9) {
+            return "A";
+        }
+        else if (correctCtr === 8) {
+            return "B";
+        }
+        else if (correctCtr === 7) {
+            return "C";
+        }
+        else if (correctCtr === 6) {
+            return "D";
+        }
+        else {
+            return "F";
         }
     }
 });
