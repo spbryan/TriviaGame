@@ -22,7 +22,73 @@ $(document).ready(function () {
         image: "./assets/images/jefferson.jpg"
     };
 
-    var allTriviaList = [trivium1, trivium2];
+    var trivium3 = {
+        isSelected: false,
+        question: "What is the name of the first American Constitution?",
+        answers: ["Magna Carta", "Declaration of Independence", "Articles of Confederation", "Bill of Rights"],
+        answerKey: 3,
+        image: "./assets/images/articles_confederation.jpg"
+    };
+
+    var trivium4 = {
+        isSelected: false,
+        question: "What was the name of Robert E. Lee's horse?",
+        answers: ["Roach", "Trotter", "Trigger", "Traveler"],
+        answerKey: 4,
+        image: "./assets/images/traveler.jpg"
+    };
+
+    var trivium5 = {
+        isSelected: false,
+        question: "Who was the first U.S. president to live in the White House?",
+        answers: ["John Adams", "George Washington", "Thomas Jeffereson", "James Madison"],
+        answerKey: 1,
+        image: "./assets/images/john_adams.jpg"
+    };
+
+    var trivium6 = {
+        isSelected: false,
+        question: "Between which years was the Civil War fought?",
+        answers: ["1850-1855", "1861 - 1865", "1860-1864", "1856-1860"],
+        answerKey: 2,
+        image: "./assets/images/civil_war.jpg"
+    };
+
+    var trivium7 = {
+        isSelected: false,
+        question: "Which Treaty forced England to recognize the United States as a soverign nation?",
+        answers: ["Treaty of Philadelphia", "Treaty of London", "Treaty of Paris", "Treaty of Versailles"],
+        answerKey: 3,
+        image: "./assets/images/treaty_of_paris.jpg"
+    };
+
+    var trivium8 = {
+        isSelected: false,
+        question: "When was the last amendment made to the US Constitution?",
+        answers: ["1988", "1963", "1969", "1992"],
+        answerKey: 4,
+        image: "./assets/images/amendment.jpg"
+    };
+
+    var trivium9 = {
+        isSelected: false,
+        question: "What U.S. President lost sight in one eye following a sparring match at the White House?",
+        answers: ["Teddy Roosevelt", "James Garfield", "William Taft", "Donald Trump"],
+        answerKey: 1,
+        image: "./assets/images/teddy.jpg"
+    };
+
+    var trivium10 = {
+        isSelected: false,
+        question: "Fill in the blank.  The killer of Abraham Lincoln was  ... by profession",
+        answers: ["Soldier", "Actor", "Assassin", "Doctor"],
+        answerKey: 2,
+        image: "./assets/images/booth.jpg"
+    };
+
+    var allTriviaList = [
+        trivium1, trivium2, trivium3, trivium4, trivium5, 
+        trivium6, trivium7, trivium8, trivium9, trivium10];
     var triviaIndex = 0;
     var trivium = "";
     var correctCtr = 0;
