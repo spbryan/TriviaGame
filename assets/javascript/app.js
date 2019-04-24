@@ -86,9 +86,11 @@ $(document).ready(function () {
         image: "./assets/images/booth.jpg"
     };
 
-    var allTriviaList = [
-        trivium1, trivium2, trivium3, trivium4, trivium5, 
-        trivium6, trivium7, trivium8, trivium9, trivium10];
+    // var allTriviaList = [
+    //     trivium1, trivium2, trivium3, trivium4, trivium5, 
+    //     trivium6, trivium7, trivium8, trivium9, trivium10];
+        var allTriviaList = [
+            trivium1, trivium2];
     var triviaIndex = 0;
     var trivium = "";
     var correctCtr = 0;
@@ -253,9 +255,9 @@ $(document).ready(function () {
      */
     function displayFinalResults() {
         $("#summary").show();
-        var gameOver = $("<h1/>");
+        var gameOver = $("<div/>");
         gameOver.attr("id", "game-over");
-        gameOver.text("Game Over!");
+        gameOver.html("<h1>Game Over!<h1>");
         $("#summary").append(gameOver);
 
         var correctAnswers = $("<h2/>");

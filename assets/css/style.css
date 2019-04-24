@@ -3,19 +3,10 @@
 *  2019-04-20
 *  Style Sheet for Triva Game Project
 ************************************************/
-/* font-family: 'Great Vibes', cursive;
-font-family: 'Tangerine', cursive;
-font-family: 'Just Another Hand', cursive;
-font-family: 'Calligraffitti', cursive;
-font-family: 'Stalemate', cursive;
-font-family: 'Ruthie', cursive; */
-
 
 /* Element Styles */
 body {
-    /* background-image: url(../images/flag_documentjpg.jpg); */
     background-image: url(../images/old_flag.jpg);
-    /* background-image: url(../images/waving_flag.jpg); */
     background-attachment: fixed;
     background-size: cover;
 }
@@ -39,11 +30,34 @@ body {
     align-items: center;
 }
 
+#game-over {
+    text-align: center;
+}
+
+#game-over h1 {
+    font-size: 50px;
+}
+
+#correct-answers,
+#incorrect-answers,
+#unanswered {
+    margin: 6px 0;
+}
+
+#final-grade {
+    margin-top: 6px;
+    padding-bottom: 100px;
+}
+
 #trivia-page,
 #trivia-answer,
 #countdown-timer, 
 #summary {
     background-image: url(../images/old_parchment.jpg);
+}
+
+#trivia-page,
+#trivia-answer {
     font-family: 'Calligraffitti', cursive;
 }
 
@@ -72,13 +86,10 @@ body {
 /* Bootstrap Overrides */
 .btn-dark {
     margin-top: 50%;
-    /* color: #FDF7DC; */
     color: black;
-    /* background-color: #885d37; */
     background-image: url(../images/old_parchment.jpg);
     border-color: black;
     font-weight: bold;
-    /* font-family: 'Ruthie', cursive; */
     font-family: 'Tangerine', cursive;
     letter-spacing: 3px;
     font-size: 3em;
