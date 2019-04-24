@@ -86,11 +86,92 @@ $(document).ready(function () {
         image: "./assets/images/booth.jpg"
     };
 
-    // var allTriviaList = [
-    //     trivium1, trivium2, trivium3, trivium4, trivium5, 
-    //     trivium6, trivium7, trivium8, trivium9, trivium10];
-        var allTriviaList = [
-            trivium1, trivium2];
+    var trivium11 = {
+        isSelected: false,
+        question: "Which year was the first permanant English settlement founded?",
+        answers: ["1492", "1543", "1607", "1701"],
+        answerKey: 3,
+        image: "./assets/images/jamestown-jamesfort.jpg"
+    };
+
+    var trivium12 = {
+        isSelected: false,
+        question: "Name the first cash crop of America",
+        answers: ["Cotton", "Corn", "Wheat", "Tobacco"],
+        answerKey: 4,
+        image: "./assets/images/tobacco.jpg"
+    };
+
+    var trivium13 = {
+        isSelected: false,
+        question: "Who was the first US President to appear on TV?",
+        answers: ["Franklin Roosevelt", "Richard Nixon", "John F. Kennedy", "Dwight D. Eisenhower"],
+        answerKey: 1,
+        image: "./assets/images/fdr.jpg"
+    };
+
+    var trivium14 = {
+        isSelected: false,
+        question: "Who was the President of the Confederacy during the Civil War?",
+        answers: ["Charles Sumner", "Jefferson Davis", "Mason Dixon", "James Longstreet"],
+        answerKey: 2,
+        image: "./assets/images/jefferson_davis.jpg"
+    };
+
+    var trivium15 = {
+        isSelected: false,
+        question: "What year did the Boston Tea Party occur?",
+        answers: ["1787", "1776", "1773", "1769"],
+        answerKey: 3,
+        image: "./assets/images/boston-tea-party.jpg"
+    };
+
+    var trivium16 = {
+        isSelected: false,
+        question: "Name the oldest city in the United States",
+        answers: ["Philadelphia PA", "Jamestown VA", "Boston MA", "St. Augustine FL"],
+        answerKey: 4,
+        image: "./assets/images/st_augustine.jpg"
+    };
+
+    var trivium17 = {
+        isSelected: false,
+        question: "Which US President served as Chief Justice of the supreme court after his presidency?",
+        answers: ["William Howard Taft ", "John Quincy Adams", "James Garfield", "Theodore Roosevelt"],
+        answerKey: 1,
+        image: "./assets/images/taft.jpg"
+    };
+
+    var trivium18 = {
+        isSelected: false,
+        question: "How old was Benjamin Franklin when he composed his own epitaph?",
+        answers: ["18", "22", "31", "43"],
+        answerKey: 2,
+        image: "./assets/images/benjamin-franklin.jpg"
+    };
+
+    var trivium19 = {
+        isSelected: false,
+        question: "In what year did the space shuttle Challenger explode?",
+        answers: ["1984", "1985", "1986", "1987"],
+        answerKey: 3,
+        image: "./assets/images/shuttle.jpg"
+    };
+
+    var trivium20 = {
+        isSelected: false,
+        question: "A 'Hooverville' was a",
+        answers: ["city", "farming town", "fishing village", "shantytown"],
+        answerKey: 4,
+        image: "./assets/images/hooverville.jpg"
+    };
+
+    var allTriviaList = [
+        trivium1, trivium2, trivium3, trivium4, trivium5,
+        trivium6, trivium7, trivium8, trivium9, trivium10,
+        trivium11, trivium12, trivium13, trivium14, trivium15,
+        trivium16, trivium17, trivium18, trivium19, trivium20];
+    var triviaList = [];
     var triviaIndex = 0;
     var trivium = "";
     var correctCtr = 0;
@@ -110,6 +191,7 @@ $(document).ready(function () {
      */
     $("#start-game").on("click", function () {
         $("#start-game").empty();
+        populateTriviaList();
         askNextQuestion();
     })
 
@@ -133,6 +215,19 @@ $(document).ready(function () {
     })
 
     /**
+     * Populate a random list of 10 trivia questions
+     */
+    function populateTriviaList() {
+        while (triviaList.length < 10) {
+            var index = Math.floor(Math.random() * 20);
+            if (!allTriviaList[index].isSelected) {
+                triviaList.push(allTriviaList[index]);
+                allTriviaList[index].isSelected = true;
+            }
+        }
+    }
+
+    /**
      * If there are more trivium this function sets a three second timer
      * to transition to the next "askNextQuestion".  Otherwise it sets a 
      * value to indicate the game is over
@@ -146,7 +241,7 @@ $(document).ready(function () {
             transitionDelay();
         }, 3000);
 
-        if (triviaIndex < allTriviaList.length) {
+        if (triviaIndex < triviaList.length) {
             answerCountdown = 29;
         }
         else {
@@ -159,7 +254,7 @@ $(document).ready(function () {
      */
     function askNextQuestion() {
         $("#trivia-answer").empty();
-        trivium = allTriviaList[triviaIndex];
+        trivium = triviaList[triviaIndex];
         displayTrivium();
         answerIntervalId = setInterval(answerTimer, 1000);
     }
@@ -187,9 +282,7 @@ $(document).ready(function () {
     function transitionDelay() {
         $("#trivia-answer").hide();
         if (gameOver) {
-            debugger;
             displayFinalResults();
-            stopNextQuestionTimer();
         }
         else {
             askNextQuestion();
