@@ -44,6 +44,7 @@ body {
 #countdown-timer, 
 #summary {
     background-image: url(../images/old_parchment.jpg);
+    font-family: 'Calligraffitti', cursive;
 }
 
 #trivia-page {
