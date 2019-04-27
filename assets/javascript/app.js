@@ -177,7 +177,7 @@ $(document).ready(function () {
     var correctCtr = 0;
     var incorrectCtr = 0;
     var unansweredCtr = 0;
-    var answerCountdown = 29;
+    var answerCountdown = 15;
     var answerIntervalId;
     var gameOver = false;
 
@@ -242,7 +242,7 @@ $(document).ready(function () {
         }, 3000);
 
         if (triviaIndex < triviaList.length) {
-            answerCountdown = 29;
+            answerCountdown = 15;
         }
         else {
             gameOver = true;
@@ -300,6 +300,7 @@ $(document).ready(function () {
      * Display the question and the list of possible answers
      */
     function displayTrivium() {
+        $("#countdown-timer").html("<h2>" + "Timer: " + answerCountdown + "</h2>");
         $("#countdown-timer").show();
         $("#trivia-page").show();
         //Display Question
